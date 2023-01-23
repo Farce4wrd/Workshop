@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.grizzly.GrizzlyWeb.entity.Faculty;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Faculty ,Long>{
+public interface FacultyRepository extends JpaRepository<Faculty ,Long>{
 
 }

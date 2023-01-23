@@ -32,7 +32,7 @@ public class Faculty {
 	private String email;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="DEPARTMENTID")
+	@JoinColumn(name="department_id")
 	private Department department;
 	
 	public Faculty() {
@@ -67,7 +67,7 @@ public class Faculty {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 
@@ -81,8 +81,16 @@ public class Faculty {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
-				+ ", email=" + email + ", department=" + department + "]";
+		return "Faculty [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
+				+ ", email=" + email +  "]";
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 	
 	

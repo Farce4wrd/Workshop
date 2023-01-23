@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="DEPARTMENT")
-public class Department {
+public class Department  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="DEPARTMENT_ID")
@@ -24,7 +24,7 @@ public class Department {
 	private String name;
 	
 	@Column(name="DEPARTMENT_PHONE")
-	private int phone;
+	private long phone;
 	
 	@Column(name="DEPARTMENT_LOCATION")
 	private String location;
@@ -43,11 +43,11 @@ public class Department {
 		this.name = name;
 	}
 
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 
@@ -61,6 +61,15 @@ public class Department {
 	@Override
 	public String toString() {
 		return "Department [id=" + id + ", name=" + name + ", phone=" + phone + ", location=" + location
-				+ ", employees=" + faculties + "]";
+				+ ", faculties=" + faculties + "]";
+	}
+	public List<Faculty> getFaculties() {
+		return this.faculties;
+	}
+	public void setFaculty(Faculty faculty) {
+		this.faculties.add(faculty);
+	}
+	public void removeFaculty(Faculty faculty) {
+		this.faculties.remove(faculty);
 	}
 }

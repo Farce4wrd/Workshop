@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<script>
+		getFriends();
+
+		async function getFriends() {
+			let host1 = "http://localhost:9090/grizzlies/faculty/all";
+
+			let response = await fetch(host1);
+			let data = await response.json()
+			display(data);
+			return data;
+		}
+
+		function display(allData) {
+
+			let insertionPoint = document.getElementById("data");
+			let tagMaker = document.createElement("div");
+
+			for (let data of allData) {
+				for (let key in data) {
+					let entry = data[key];
+					console.log(key);
+					console.log(entry);
+
+					document.getElementById("data").innerHTML += `<div>${entry}</div>`;
+				}
+				document.getElementById("data").innerHTML += "<br/>";
+			}
+
+		}
+
+
+	</script>
+</head>
+
+<body>
+	<h2>Hello World!</h2>
+	<div id="data"></div>
+</body>
+
+</html>

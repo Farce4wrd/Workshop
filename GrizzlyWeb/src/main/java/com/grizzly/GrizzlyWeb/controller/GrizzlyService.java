@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.grizzly.GrizzlyWeb.repo.DepartmentRepository;
-import com.grizzly.GrizzlyWeb.repo.EmployeeRepository;
+import com.grizzly.GrizzlyWeb.repo.FacultyRepository;
 
 @Controller
 @RequestMapping("/Test")
 public class GrizzlyService {
 	
-	private EmployeeRepository employeeRepo;
+	private FacultyRepository employeeRepo;
 	private DepartmentRepository departmentRepo;
 	
 	@Autowired
-	public GrizzlyService(EmployeeRepository employeeRepo, DepartmentRepository departmentRepo) {
+	public GrizzlyService(FacultyRepository employeeRepo, DepartmentRepository departmentRepo) {
 		
 		this.departmentRepo = departmentRepo;
 		this.employeeRepo = employeeRepo;
