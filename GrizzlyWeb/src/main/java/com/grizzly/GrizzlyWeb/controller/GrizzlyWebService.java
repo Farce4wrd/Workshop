@@ -1,5 +1,7 @@
 package com.grizzly.GrizzlyWeb.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,13 +43,13 @@ public class GrizzlyWebService {
 		return this.departmentRepo.findById(id).get();
 		
 	}
-	@GetMapping("/department/all")
+	@GetMapping("/department/")
 	public Iterable<Department> getDept(){
 		return this.departmentRepo.findAll();
 	}
 	
 	
-	@GetMapping("/faculty/all")
+	@GetMapping("/faculty/")
 	public Iterable<Faculty> getFaculty(){
 		return this.facultyRepo.findAll();
 	}
