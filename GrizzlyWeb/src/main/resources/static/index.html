@@ -2,48 +2,132 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Management</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
 
-	<script>
-		getFriends();
-
-		async function getFriends() {
-			let host1 = "http://localhost:9090/grizzlies/faculty/all";
-
-			let response = await fetch(host1);
-			let data = await response.json()
-			display(data);
-			return data;
+<script>
+	class Department{
+		constructor(name, phone, location){
+			this.name = name;
+			this.phone = phone;
+			this.location= location;
 		}
+	}
+		getDepartment();
 
-		function display(allData) {
-
-			let insertionPoint = document.getElementById("data");
-			let tagMaker = document.createElement("div");
-
-			for (let data of allData) {
-				for (let key in data) {
-					let entry = data[key];
-					console.log(key);
-					console.log(entry);
-
-					document.getElementById("data").innerHTML += `<div>${entry}</div>`;
-				}
-				document.getElementById("data").innerHTML += "<br/>";
+		async function getDepartment(){
+			const response = await fetch("http://localhost:9090/department");
+			const data = await response.json();
+			console.log(data);
+			var temp = "";
+			let length = data.length;
+			for(let i =0; i<length; i++){
+				var id = i+1;
+				var link =`<a href=/department/${id}/faculties>`;
+				temp +="<tr>";
+				temp +="<td>"+link+id+"</td>";
+				temp+="<td>" + data[i].name + "</td>";
+				temp+="<td>"+ data[i].phone + "</td>";
+				temp+="<td>"+ data[i].location +"</td>";
+				
 			}
-
+			document.getElementById("deptData").innerHTML = temp;
+			
 		}
+		
+		var form = document.getElementById('form');
+		form.addEventListener('submit', function(e){
+			e.preventDefault();
+			
+			var data ={
+					"name": "MyName",
+					"phone":1000000,
+					"location":"ThisLocation"
+			};
+			
+			fetch('http://localhost:9090/department',{
+				method:'POST',
+				body: JSON.stringify(data)
+			,
+				headers:{
+					'Content-type':'application/json; charset=UTF-8'
+				}
+			}).then(response => response.json())
+			.then(json => console.log(json));
+		})
+		
+		function testStuff(){
 
-
+			let deptName = document.getElementById('deptName').value;
+			let deptPhone = document.getElementById('deptPhone').value;
+			let deptLocation = document.getElementById('deptLocation').value;
+			let rawdata = new Department(deptName, deptPhone, deptLocation);
+			console.log(rawdata);
+			fetch('http://localhost:9090/department',{
+				method:'POST',
+				body: JSON.stringify(rawdata)
+			,
+				headers:{
+					'Content-type':'application/json; charset=UTF-8'
+				}
+			}).then(response => response.json())
+			.then(json => console.log(json));
+		}
 	</script>
 </head>
 
 <body>
-	<h2>Hello World!</h2>
 	<div id="data"></div>
+
+	<h2 style="text-align: center; line-height: 2em;">Manage
+		Department</h2>
+	<div class="container">
+		<table class="table">
+			<tr>
+				<th>Department ID</th>
+				<th>Department name</th>
+				<th>Department phone</th>
+				<th>Department Location</th>
+			</tr>
+			<tbody id="deptData">
+			</tbody>
+		</table>
+	</div>
+	<div class="container">
+		<form id="form">
+			<div class="form-group">
+				<label for="deptName">Enter new Department Name</label> <input
+					class="form-control" type="text" name="name" id="deptName" />
+			</div>
+			<div class="form-group">
+				<label for="deptPhone">Enter new Department Phone</label> <input
+					class="form-control" type="number" name="phone" id="deptPhone" />
+			</div>
+			<div class="form-group">
+				<label for="deptLocation" name="deptLocation">Enter
+					new Department Location</label> <input class="form-control" type="text"
+					name="location" id="deptLocation" />
+			</div>
+
+
+
+			<input type="submit" value="Add Department" />
+		</form>
+		<button onclick="testStuff()">Test</button>
+
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>

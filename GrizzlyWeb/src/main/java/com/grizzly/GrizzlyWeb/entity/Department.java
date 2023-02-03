@@ -34,6 +34,12 @@ public class Department  {
 	public Department() {
 		
 	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -65,8 +71,11 @@ public class Department  {
 	public List<Faculty> getFaculties() {
 		return this.faculties;
 	}
-	public void setFaculty(Faculty faculty) {
+	public void addFaculty(Faculty faculty) {
 		this.faculties.add(faculty);
+	}
+	public void setFaculty(List<Faculty> facul) {
+		this.faculties = facul;
 	}
 	public void removeFaculty(Faculty faculty) {
 		this.faculties.remove(faculty);
